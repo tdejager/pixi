@@ -107,6 +107,8 @@ impl PixiControl {
         }
     }
 
+    pub fn update(&self, spec: impl IntoMatchSpec) {}
+
     /// Initialize pixi project inside a temporary directory. Returns a [`AddBuilder`]. To execute
     /// the command and await the result call `.await` on the return value.
     pub fn add(&self, spec: impl IntoMatchSpec) -> AddBuilder {
