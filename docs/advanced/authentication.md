@@ -103,3 +103,11 @@ The JSON should follow the following format:
 Note: if you use a wildcard in the host, any subdomain will match (e.g. `*.prefix.dev` also matches `repo.prefix.dev`).
 
 Lastly you can set the authentication override file in the [global configuration file](./global_configuration.md).
+
+
+# PyPI authentication
+
+## Keyring authentication
+
+
+## `.netrc` authentication
