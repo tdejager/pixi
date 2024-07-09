@@ -1139,19 +1139,18 @@ fn is_dynamic(path: &Path) -> bool {
     let Ok(contents) = fs::read_to_string(path.join("pyproject.toml")) else {
         return true;
     };
-    let Ok(pyproject_toml) = PyProjectToml::from(&contents) else {
+    let Ok(pyproject_toml) = PyProjectToml::from_str(&contents) else {
         return true;
     };
     // // If `[project]` is not present, we assume it's dynamic.
-    // let Some(project) = pyproject_toml.project else {
-    //     // ...unless it appears to be a Poetry project.
-    //     return pyproject_toml
-    //         .tool
-    //         .map_or(true, |tool| tool.poetry.is_none());
-    // };
+    let Some(project) = pyproject_toml.project else {
+        // ...unless it appears to be a Poetry project.
+        return pyproject_toml
+            .tool
+            .map_or(true, |tool| tool.poetry.is_none());
+    };
     // `[project.dynamic]` must be present and non-empty.
-    // project.dynamic.is_some_and(|dynamic| !dynamic.is_empty())
-    return false;
+    project.dynamic.is_some_and(|dynamic| !dynamic.is_empty())
 }
 
 #[cfg(test)]
