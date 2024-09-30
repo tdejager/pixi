@@ -29,6 +29,7 @@ pub mod project;
 pub mod remove;
 pub mod run;
 pub mod search;
+pub mod search_pypi;
 pub mod self_update;
 pub mod shell;
 pub mod shell_hook;
@@ -123,6 +124,7 @@ pub enum Command {
     Info(info::Args),
     Upload(upload::Args),
     Search(search::Args),
+    SearchPypi(search_pypi::Args),
     SelfUpdate(self_update::Args),
     Clean(clean::Args),
     Completion(completion::Args),
@@ -270,6 +272,7 @@ pub async fn execute_command(command: Command) -> miette::Result<()> {
         Command::Info(cmd) => info::execute(cmd).await,
         Command::Upload(cmd) => upload::execute(cmd).await,
         Command::Search(cmd) => search::execute(cmd).await,
+        Command::SearchPypi(cmd) => search_pypi::execute(cmd).await,
         Command::Project(cmd) => project::execute(cmd).await,
         Command::Remove(cmd) => remove::execute(cmd).await,
         Command::SelfUpdate(cmd) => self_update::execute(cmd).await,
