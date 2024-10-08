@@ -579,6 +579,12 @@ fn whats_the_plan<'a>(
     })
 }
 
+/// Enum to use when needing to reinstall a package
+pub enum ForceReinstall {
+    All,
+    Packages(Vec<String>),
+}
+
 /// Installs and/or remove python distributions.
 // TODO: refactor arguments in struct
 #[allow(clippy::too_many_arguments)]

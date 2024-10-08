@@ -4,7 +4,7 @@ use distribution_types::CachedDist;
 use rattler_conda_types::PrefixRecord;
 use uv_python::PythonEnvironment;
 
-use crate::install_wheel::get_wheel_info;
+use crate::pypi_install::wheel::get_wheel_info;
 
 use ahash::{AHashMap, AHashSet};
 

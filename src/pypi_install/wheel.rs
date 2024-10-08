@@ -1,3 +1,14 @@
+use std::{
+    collections::HashMap,
+    fs::{self, File},
+    io::{BufRead, BufReader, Read},
+    path::{Path, PathBuf},
+};
+
+use miette::IntoDiagnostic;
+use serde::{Deserialize, Serialize};
+use uv_python::PythonEnvironment;
+
 /// Some vendored structs and functions from
 /// https://github.com/astral-sh/uv/tree/main/crates/install-wheel-rs
 use csv::ReaderBuilder;
@@ -97,17 +108,6 @@ pub(crate) fn get_wheel_kind(
     Ok(lib_kind)
 }
 
-use std::{
-    collections::HashMap,
-    fs::{self, File},
-    io::{BufRead, BufReader, Read},
-    path::{Path, PathBuf},
-};
-
-use miette::IntoDiagnostic;
-use serde::{Deserialize, Serialize};
-use uv_python::PythonEnvironment;
-
 /// Line in a RECORD file
 /// <https://www.python.org/dev/peps/pep-0376/#record>
 ///
@@ -206,7 +206,7 @@ pub(crate) fn parse_wheel_file(wheel_text: &str) -> miette::Result<LibKind> {
 
 #[cfg(test)]
 mod test {
-    use crate::install_wheel::LibKind;
+    use super::LibKind;
     use std::io::Cursor;
 
     use super::{parse_key_value_file, parse_wheel_file, read_record_file};

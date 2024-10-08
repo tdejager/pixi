@@ -24,10 +24,10 @@ use serde::{Deserialize, Serialize};
 use tokio::sync::Semaphore;
 
 use crate::{
-    install_pypi,
     lock_file::{UpdateLockFileOptions, UvResolutionContext},
     prefix::Prefix,
     project::{grouped_environment::GroupedEnvironment, Environment, HasProjectRef},
+    pypi_install,
     rlimit::try_increase_rlimit_to_sensible,
     Project,
 };
@@ -356,7 +356,7 @@ pub async fn update_prefix_pypi(
             environment_name.fancy_display()
         ),
         |_| {
-            install_pypi::update_python_distributions(
+            pypi_install::update_python_distributions(
                 lock_file_dir,
                 prefix,
                 conda_records,
